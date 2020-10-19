@@ -1,12 +1,34 @@
-require_relative 'cookbook'
-require_relative 'controller'
-require_relative 'router'
+require "sinatra"
+require "sinatra/reloader" if development?
+require "pry-byebug"
+require "better_errors"
 
-csv_file   = File.join(__dir__, 'recipes.csv')
-cookbook   = Cookbook.new(csv_file)
-controller = Controller.new(cookbook)
+require_relative "cookbook"
+require_relative "recipe"
 
-router = Router.new(controller)
+set :bind, '0.0.0.0'
 
-# Start the app
-router.run
+configure :development do
+  use BetterErrors::Middleware
+  BetterErrors.application_root = File.expand_path('..', __FILE__)
+end
+
+# L E T ' S  G O
+
+# Index page
+get '/' do
+  cookbook = Cookbook.new(File.join(__dir__, 'recipes.csv'))
+  @recipes = cookbook.all
+  erb :index
+end
+
+# # About page
+# get '/about' do
+#   erb :about
+# end
+
+# # About subpages
+# get '/team/:username' do
+#   puts params[:username]
+#   "The username is #{params[:username]}"
+# end

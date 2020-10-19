@@ -1,6 +1,6 @@
 require 'csv'
 require_relative 'recipe'
-require_relative 'controller'
+# require_relative 'controller'
 
 class Cookbook
   # attr_reader :csv_file_path
