@@ -7,7 +7,7 @@
 <% @recipes.each do |recipe| %>
   <row>
     <h4><%= recipe.name %></h4>
-    <h6><%= recipe.rating %> / 5 - <%= recipe.prep_time %></h6>
+    <h6>Rating : <%= recipe.rating %> / 5 - Preparation time : <%= recipe.prep_time %></h6>
     <p><%= recipe.description %></p>
   </row>
 <% end %>

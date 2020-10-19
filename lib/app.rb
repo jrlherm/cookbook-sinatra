@@ -22,6 +22,11 @@ get '/' do
   erb :index
 end
 
+get '/new' do
+  @recipe = param[:recipe]
+  erb :new
+end
+
 # # About page
 # get '/about' do
 #   erb :about
